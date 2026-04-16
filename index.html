@@ -1119,7 +1119,7 @@
     <div class="results-more-wrap">
       <button class="results-more-btn" id="resultsMoreBtn" onclick="toggleResults()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
-        Zobrazit více výsledků (<span id="hiddenCount">33</span>)
+        Zobrazit více výsledků (39)
       </button>
     </div>
   </div>
@@ -1524,16 +1524,22 @@
   });
 
   // ── Zobrazit více výsledků ───────────────────
+  const _svg = '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>';
+  const _resultExtras = document.querySelectorAll('.result-extra');
+  const _resultCount  = _resultExtras.length;
+
   function toggleResults() {
-    const extras = document.querySelectorAll('.result-extra');
-    const btn    = document.getElementById('resultsMoreBtn');
-    const count  = document.getElementById('hiddenCount');
-    const open   = btn.classList.toggle('open');
-    extras.forEach(el => el.classList.toggle('visible', open));
+    const btn  = document.getElementById('resultsMoreBtn');
+    const open = btn.classList.toggle('open');
+    _resultExtras.forEach(el => el.classList.toggle('visible', open));
     btn.innerHTML = open
-      ? '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg> Zobrazit méně'
-      : '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg> Zobrazit více výsledků (' + count.textContent + ')';
-    if (!open) setTimeout(() => document.getElementById('vysledky').scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+      ? _svg + ' Zobrazit méně'
+      : _svg + ' Zobrazit více výsledků (' + _resultCount + ')';
+    if (!open) {
+      setTimeout(() => {
+        document.getElementById('vysledky').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 320);
+    }
   }
 
   // ── Scroll fade-in ───────────────────────────
