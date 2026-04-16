@@ -472,6 +472,8 @@
       padding: 28px 12px 10px;
       font-size: .78rem; color: #ddd; font-weight: 500;
     }
+    .gallery-extra { display: none; }
+    .gallery-extra.visible { display: block; }
     /* Lightbox */
     #lightbox {
       display: none; position: fixed; inset: 0; z-index: 3000;
@@ -1316,36 +1318,44 @@
         <div class="gallery-caption">Závodní atmosféra – Vánoční cena 2017</div>
       </div>
 
-      <div class="gallery-item fade-up" onclick="openLightbox(this)">
+      <!-- skryté fotky -->
+      <div class="gallery-item fade-up gallery-extra" onclick="openLightbox(this)">
         <img src="gallery/vanocni2017_3.jpg" alt="Vyhlášení výsledků Vánoční cena 2017" loading="lazy" />
         <div class="gallery-caption">Vyhlášení výsledků – Vánoční cena 2017</div>
       </div>
 
-      <div class="gallery-item fade-up" onclick="openLightbox(this)">
+      <div class="gallery-item fade-up gallery-extra" onclick="openLightbox(this)">
         <img src="gallery/stupne2017.jpg" alt="Stupně vítězů Vánoční cena 2017" loading="lazy" />
         <div class="gallery-caption">Stupně vítězů – Vánoční cena 2017</div>
       </div>
 
-      <div class="gallery-item fade-up" onclick="openLightbox(this)">
+      <div class="gallery-item fade-up gallery-extra" onclick="openLightbox(this)">
         <img src="gallery/msm_1.jpg" alt="Mistrovství severní Moravy" loading="lazy" />
         <div class="gallery-caption">Mistrovství severní Moravy</div>
       </div>
 
-      <div class="gallery-item fade-up" onclick="openLightbox(this)">
+      <div class="gallery-item fade-up gallery-extra" onclick="openLightbox(this)">
         <img src="gallery/msm_2.jpg" alt="Mistrovství severní Moravy – závodník" loading="lazy" />
         <div class="gallery-caption">Závodník – Mistrovství severní Moravy</div>
       </div>
 
-      <div class="gallery-item fade-up" onclick="openLightbox(this)">
+      <div class="gallery-item fade-up gallery-extra" onclick="openLightbox(this)">
         <img src="gallery/msm_3.jpg" alt="Mistrovství severní Moravy – bench press" loading="lazy" />
         <div class="gallery-caption">Bench press – Mistrovství severní Moravy</div>
       </div>
 
-      <div class="gallery-item fade-up" onclick="openLightbox(this)">
+      <div class="gallery-item fade-up gallery-extra" onclick="openLightbox(this)">
         <img src="gallery/msm_4.jpg" alt="Mistrovství severní Moravy" loading="lazy" />
         <div class="gallery-caption">Mistrovství severní Moravy</div>
       </div>
 
+    </div>
+
+    <div class="results-more-wrap" style="margin-top:20px;">
+      <button class="results-more-btn" id="galleryMoreBtn" onclick="toggleGallery()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        Zobrazit více fotek (6)
+      </button>
     </div>
   </div>
 </section>
@@ -1531,6 +1541,18 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); fadeObs.unobserve(e.target); } });
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
+
+  // ── Galerie toggle ───────────────────────────
+  function toggleGallery() {
+    const extras = document.querySelectorAll('.gallery-extra');
+    const btn = document.getElementById('galleryMoreBtn');
+    const open = btn.classList.toggle('open');
+    extras.forEach(el => el.classList.toggle('visible', open));
+    btn.innerHTML = open
+      ? '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg> Zobrazit méně'
+      : '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg> Zobrazit více fotek (' + extras.length + ')';
+    if (!open) document.getElementById('galerie').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 
   // ── Lightbox ─────────────────────────────────
   function openLightbox(item) {
