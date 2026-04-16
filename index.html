@@ -329,6 +329,23 @@
     .badge-none   { background: var(--dark4); color: var(--muted); border: 1px solid var(--border); }
     @media (max-width: 580px) { .result-row { grid-template-columns: 1fr; gap: 6px; } }
 
+    .res-athlete { color: var(--muted); font-weight: 400; font-size: .82rem; margin-left: 4px; }
+
+    .result-extra { display: none; }
+    .result-extra.visible { display: grid; }
+
+    .results-more-wrap { display: flex; justify-content: center; margin-top: 16px; }
+    .results-more-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 22px; border-radius: 8px;
+      background: var(--dark3); border: 1px solid var(--border);
+      color: var(--muted); font-size: .88rem; font-weight: 600;
+      cursor: pointer; transition: all .2s;
+    }
+    .results-more-btn:hover { border-color: var(--red); color: var(--light); }
+    .results-more-btn svg { transition: transform .3s; }
+    .results-more-btn.open svg { transform: rotate(180deg); }
+
     /* ── ACHIEVEMENTS ────────────────────────── */
     #uspechy { background: var(--dark); }
     .ach-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin-top: 44px; }
@@ -767,122 +784,188 @@
     <span class="section-label fade-up">Závodíme</span>
     <h2 class="section-title fade-up">Výsledky závodů</h2>
     <p class="section-desc fade-up">Přehled výsledků z posledních soutěží na regionální, národní i mezinárodní úrovni.</p>
-    <div class="results-grid">
+    <div class="results-grid" id="resultsGrid">
 
       <div class="result-row fade-up">
         <span class="result-date">2026 · Karviná</span>
-        <span class="result-name">MMS juniorů RAW – Junioři do 83 kg &nbsp;<span style="color:var(--muted);font-weight:400;font-size:.82rem">Filip Adámek</span></span>
-        <span class="result-badge badge-bronze">🥉 3. místo · 500 kg</span>
-      </div>
-
-      <div class="result-row fade-up">
-        <span class="result-date">2026 · Karviná</span>
-        <span class="result-name">MMS juniorů RAW – Junioři do 66 kg &nbsp;<span style="color:var(--muted);font-weight:400;font-size:.82rem">Alexandr Novotný</span></span>
+        <span class="result-name">MMS juniorů RAW – Junioři -66 kg <span class="res-athlete">Alexandr Novotný</span></span>
         <span class="result-badge badge-silver">🥈 2. místo · 432,5 kg</span>
       </div>
-
+      <div class="result-row fade-up">
+        <span class="result-date">2026 · Karviná</span>
+        <span class="result-name">MMS juniorů RAW – Junioři -83 kg <span class="res-athlete">Filip Adámek</span></span>
+        <span class="result-badge badge-bronze">🥉 3. místo · 500 kg</span>
+      </div>
       <div class="result-row fade-up">
         <span class="result-date">2025 · Lukov</span>
-        <span class="result-name">33. MČR juniorů EQ – Junioři do 74 kg &nbsp;<span style="color:var(--muted);font-weight:400;font-size:.82rem">Štěpán Ticháček</span></span>
+        <span class="result-name">33. MČR juniorů EQ – Junioři -74 kg <span class="res-athlete">Štěpán Ticháček</span></span>
         <span class="result-badge badge-gold">🥇 1. místo · 535 kg</span>
       </div>
-
       <div class="result-row fade-up">
         <span class="result-date">2025 · Lukov</span>
-        <span class="result-name">33. MČR Open EQ – Muži do 74 kg &nbsp;<span style="color:var(--muted);font-weight:400;font-size:.82rem">Štěpán Ticháček</span></span>
+        <span class="result-name">33. MČR Open EQ – Muži -74 kg <span class="res-athlete">Štěpán Ticháček</span></span>
         <span class="result-badge badge-bronze">🥉 3. místo · 535 kg</span>
       </div>
-
       <div class="result-row fade-up">
         <span class="result-date">2025 · Karviná</span>
-        <span class="result-name">9. MMS juniorů RAW – Junioři do 93 kg &nbsp;<span style="color:var(--muted);font-weight:400;font-size:.82rem">Štěpán M. Jedelský</span></span>
+        <span class="result-name">9. MMS juniorů RAW – Junioři -93 kg <span class="res-athlete">Štěpán M. Jedelský</span></span>
         <span class="result-badge badge-silver">🥈 2. místo · 560 kg</span>
       </div>
-
       <div class="result-row fade-up">
         <span class="result-date">2024 · Karviná</span>
-        <span class="result-name">MČR v RAW mrtvém tahu – Mladší junioři do 93 kg &nbsp;<span style="color:var(--muted);font-weight:400;font-size:.82rem">Štěpán M. Jedelský</span></span>
+        <span class="result-name">MČR RAW mrtvý tah – ML junioři -93 kg <span class="res-athlete">Štěpán M. Jedelský</span></span>
         <span class="result-badge badge-gold">🥇 1. místo · 235 kg</span>
       </div>
-
+      <div class="result-row fade-up">
+        <span class="result-date">2024 · Karviná</span>
+        <span class="result-name">8. MMS juniorů RAW – ML junioři -93 kg <span class="res-athlete">Štěpán M. Jedelský</span></span>
+        <span class="result-badge badge-gold">🥇 1. místo · 530 kg</span>
+      </div>
+      <div class="result-row fade-up">
+        <span class="result-date">2024 · Karviná</span>
+        <span class="result-name">8. MMS juniorů RAW – ML junioři -66 kg <span class="res-athlete">Alexandr Novotný</span></span>
+        <span class="result-badge badge-gold">🥇 1. místo · 405 kg</span>
+      </div>
+      <div class="result-row fade-up">
+        <span class="result-date">2024 · Karviná</span>
+        <span class="result-name">8. MMS juniorů RAW – ML junioři -93 kg <span class="res-athlete">Daniel Tegza</span></span>
+        <span class="result-badge badge-silver">🥈 2. místo · 430 kg</span>
+      </div>
       <div class="result-row fade-up">
         <span class="result-date">2024 · Benešov</span>
-        <span class="result-name">12. MČR mladších juniorů RAW – do 66 kg &nbsp;<span style="color:var(--muted);font-weight:400;font-size:.82rem">Alexandr Novotný</span></span>
+        <span class="result-name">12. MČR ML juniorů RAW – ML junioři -66 kg <span class="res-athlete">Alexandr Novotný</span></span>
         <span class="result-badge badge-bronze">🥉 3. místo · 450 kg</span>
       </div>
 
-      <div class="result-row fade-up">
+      <!-- skryté řádky -->
+      <div class="result-row fade-up result-extra hidden">
         <span class="result-date">2024 · Karviná</span>
-        <span class="result-name">8. MMS juniorů RAW – Mladší junioři do 93 kg &nbsp;<span style="color:var(--muted);font-weight:400;font-size:.82rem">Štěpán M. Jedelský</span></span>
-        <span class="result-badge badge-gold">🥇 1. místo · 530 kg</span>
+        <span class="result-name">8. MMS juniorů RAW – ML junioři -83 kg <span class="res-athlete">Adam Lukeš</span></span>
+        <span class="result-badge badge-bronze">🥉 3. místo · 385 kg</span>
       </div>
-
-      <div class="result-row fade-up">
+      <div class="result-row fade-up result-extra hidden">
         <span class="result-date">2024 · Karviná</span>
-        <span class="result-name">8. MMS juniorů RAW – Mladší junioři do 66 kg &nbsp;<span style="color:var(--muted);font-weight:400;font-size:.82rem">Alexandr Novotný</span></span>
-        <span class="result-badge badge-gold">🥇 1. místo · 405 kg</span>
-      </div>
-
-      <div class="result-row fade-up">
-        <span class="result-date">2024 · Karviná</span>
-        <span class="result-name">Otevřené MČR juniorů v RAW mrtvém tahu – do 105 kg &nbsp;<span style="color:var(--muted);font-weight:400;font-size:.82rem">David Petr</span></span>
+        <span class="result-name">Otevřené MČR juniorů RAW mrtvý tah – Junioři -105 kg <span class="res-athlete">David Petr</span></span>
         <span class="result-badge badge-bronze">🥉 3. místo · 255 kg</span>
       </div>
-
-      <div class="result-row fade-up">
+      <div class="result-row fade-up result-extra hidden">
         <span class="result-date">2023 · Karviná</span>
-        <span class="result-name">7. MMS juniorů RAW – Mladší junioři do 83 kg &nbsp;<span style="color:var(--muted);font-weight:400;font-size:.82rem">Štěpán Ticháček</span></span>
+        <span class="result-name">7. MMS juniorů RAW – ML junioři -83 kg <span class="res-athlete">Štěpán Ticháček</span></span>
         <span class="result-badge badge-gold">🥇 1. místo · 505 kg</span>
       </div>
-
-      <div class="result-row fade-up">
+      <div class="result-row fade-up result-extra hidden">
         <span class="result-date">2023 · Karviná</span>
-        <span class="result-name">7. MMS juniorů RAW – Mladší junioři do 74 kg &nbsp;<span style="color:var(--muted);font-weight:400;font-size:.82rem">Adam Macenauer</span></span>
-        <span class="result-badge badge-bronze">🥉 3. místo · 410 kg</span>
-      </div>
-
-      <div class="result-row fade-up">
-        <span class="result-date">2023 · Karviná</span>
-        <span class="result-name">2. MČR ML juniorů v RAW mrtvém tahu – do 83 kg &nbsp;<span style="color:var(--muted);font-weight:400;font-size:.82rem">Štěpán Ticháček</span></span>
+        <span class="result-name">2. MČR ML juniorů RAW mrtvý tah – -83 kg <span class="res-athlete">Štěpán Ticháček</span></span>
         <span class="result-badge badge-silver">🥈 2. místo · 225 kg</span>
       </div>
-
-      <div class="result-row fade-up">
+      <div class="result-row fade-up result-extra hidden">
+        <span class="result-date">2023 · Karviná</span>
+        <span class="result-name">7. MMS juniorů RAW – ML junioři -74 kg <span class="res-athlete">Adam Macenauer</span></span>
+        <span class="result-badge badge-bronze">🥉 3. místo · 410 kg</span>
+      </div>
+      <div class="result-row fade-up result-extra hidden">
         <span class="result-date">2022 · Blansko</span>
-        <span class="result-name">6. MMJ RAW – Juniorky do 57 kg &nbsp;<span style="color:var(--muted);font-weight:400;font-size:.82rem">Eliška Hamrlová</span></span>
+        <span class="result-name">6. Mistrovství Moravy juniorek RAW – Juniorky -57 kg <span class="res-athlete">Eliška Hamrlová</span></span>
         <span class="result-badge badge-gold">🥇 1. místo · 222,5 kg</span>
       </div>
-
-      <div class="result-row fade-up">
+      <div class="result-row fade-up result-extra hidden">
         <span class="result-date">2020 · Ostrava</span>
-        <span class="result-name">28. MČR EQ – Muži do 74 kg &nbsp;<span style="color:var(--muted);font-weight:400;font-size:.82rem">Tomáš Juříček</span></span>
+        <span class="result-name">28. MČR EQ – Muži -74 kg <span class="res-athlete">Tomáš Juříček</span></span>
         <span class="result-badge badge-gold">🥇 1. místo · 672,5 kg</span>
       </div>
-
-      <div class="result-row fade-up">
+      <div class="result-row fade-up result-extra hidden">
+        <span class="result-date">2020 · Krnov</span>
+        <span class="result-name">28. Otevřené MČR dorostu a juniorů EQ – Junioři +120 kg <span class="res-athlete">Dominik Daněk</span></span>
+        <span class="result-badge badge-silver">🥈 2. místo · 652,5 kg</span>
+      </div>
+      <div class="result-row fade-up result-extra hidden">
+        <span class="result-date">2020 · Jihlava</span>
+        <span class="result-name">16. Otevřené MČR dorostu a juniorů EQ bench press – Junioři -93 kg <span class="res-athlete">Jan Pavlíček</span></span>
+        <span class="result-badge badge-silver">🥈 2. místo · BP 157,5 kg</span>
+      </div>
+      <div class="result-row fade-up result-extra hidden">
+        <span class="result-date">2020 · Krnov</span>
+        <span class="result-name">4. MČR dorostu RAW – Dorostenci -93 kg <span class="res-athlete">David Petr</span></span>
+        <span class="result-badge badge-silver">🥈 2. místo</span>
+      </div>
+      <div class="result-row fade-up result-extra hidden">
+        <span class="result-date">2020 · Zastávka</span>
+        <span class="result-name">1. MMS jižní a severní Moravy družstev – Tým <span class="res-athlete">TJ Lokomotiva Krnov A</span></span>
+        <span class="result-badge badge-gold">🥇 1. místo</span>
+      </div>
+      <div class="result-row fade-up result-extra hidden">
         <span class="result-date">2019 · Rakovník</span>
-        <span class="result-name">7. MČR RAW – Muži do 74 kg &nbsp;<span style="color:var(--muted);font-weight:400;font-size:.82rem">Tomáš Juříček</span></span>
+        <span class="result-name">7. MČR RAW – Muži -74 kg <span class="res-athlete">Tomáš Juříček</span></span>
         <span class="result-badge badge-gold">🥇 1. místo · 617,5 kg</span>
       </div>
-
-      <div class="result-row fade-up">
+      <div class="result-row fade-up result-extra hidden">
+        <span class="result-date">2019 · Sedlčany</span>
+        <span class="result-name">7. MČR dorostu RAW – Dorostenci +120 kg <span class="res-athlete">Dominik Daněk</span></span>
+        <span class="result-badge badge-gold">🥇 1. místo · 610 kg</span>
+      </div>
+      <div class="result-row fade-up result-extra hidden">
+        <span class="result-date">2019 · Krnov</span>
+        <span class="result-name">3. MMD RAW – Dorostenci +120 kg <span class="res-athlete">Dominik Daněk</span></span>
+        <span class="result-badge badge-gold">🥇 1. místo · 580 kg</span>
+      </div>
+      <div class="result-row fade-up result-extra hidden">
+        <span class="result-date">2019 · Krnov</span>
+        <span class="result-name">24. MMD EQ – Muži -74 kg <span class="res-athlete">Filip Hasmanda</span></span>
+        <span class="result-badge badge-silver">🥈 2. místo · 515 kg</span>
+      </div>
+      <div class="result-row fade-up result-extra hidden">
+        <span class="result-date">2019 · Vítkovice</span>
+        <span class="result-name">15. Otevřené MČR dorostu a juniorů EQ bench press – -120 kg <span class="res-athlete">Dominik Daněk</span></span>
+        <span class="result-badge badge-silver">🥈 2. místo · BP 152,5 kg</span>
+      </div>
+      <div class="result-row fade-up result-extra hidden">
+        <span class="result-date">2019 · Krnov</span>
+        <span class="result-name">3. MMD RAW – Dorostenci -105 kg <span class="res-athlete">Jan Jirásko</span></span>
+        <span class="result-badge badge-bronze">🥉 3. místo · 492,5 kg</span>
+      </div>
+      <div class="result-row fade-up result-extra hidden">
+        <span class="result-date">2019 · Lukov</span>
+        <span class="result-name">6. MČR EQ družstev – Tým <span class="res-athlete">TJ Lokomotiva Krnov A</span></span>
+        <span class="result-badge badge-bronze">🥉 3. místo</span>
+      </div>
+      <div class="result-row fade-up result-extra hidden">
         <span class="result-date">2018 · Krnov</span>
-        <span class="result-name">26. MČR EQ – Muži do 74 kg &nbsp;<span style="color:var(--muted);font-weight:400;font-size:.82rem">Tomáš Juříček</span></span>
+        <span class="result-name">26. MČR EQ – Muži -74 kg <span class="res-athlete">Tomáš Juříček</span></span>
         <span class="result-badge badge-gold">🥇 1. místo · 695 kg</span>
       </div>
-
-      <div class="result-row fade-up">
+      <div class="result-row fade-up result-extra hidden">
+        <span class="result-date">2018</span>
+        <span class="result-name">12. MČR RAW – Muži -74 kg <span class="res-athlete">Tomáš Juříček</span></span>
+        <span class="result-badge badge-gold">🥇 1. místo · 620 kg</span>
+      </div>
+      <div class="result-row fade-up result-extra hidden">
         <span class="result-date">2018 · Krnov</span>
-        <span class="result-name">23. MMD EQ – Muži do 74 kg &nbsp;<span style="color:var(--muted);font-weight:400;font-size:.82rem">Filip Hasmanda</span></span>
+        <span class="result-name">23. MMD EQ – Muži -74 kg <span class="res-athlete">Filip Hasmanda</span></span>
         <span class="result-badge badge-gold">🥇 1. místo · 495 kg</span>
       </div>
-
-      <div class="result-row fade-up">
+      <div class="result-row fade-up result-extra hidden">
+        <span class="result-date">2018 · Zbýšov</span>
+        <span class="result-name">10. Pohár starosty Zbýšov – Junioři -74 kg <span class="res-athlete">Daniel Steuer</span></span>
+        <span class="result-badge badge-bronze">🥉 3. místo</span>
+      </div>
+      <div class="result-row fade-up result-extra hidden">
         <span class="result-date">2017 · Praha</span>
-        <span class="result-name">MČR RAW – Muži do 74 kg &nbsp;<span style="color:var(--muted);font-weight:400;font-size:.82rem">Tomáš Juříček</span></span>
+        <span class="result-name">MČR RAW – Muži -74 kg <span class="res-athlete">Tomáš Juříček</span></span>
         <span class="result-badge badge-gold">🥇 1. místo · 610,5 kg</span>
       </div>
+      <div class="result-row fade-up result-extra hidden">
+        <span class="result-date">2015</span>
+        <span class="result-name">Mistrovství Evropy RAW – Muži <span class="res-athlete">Tomáš Juříček</span></span>
+        <span class="result-badge badge-gold">🥇 Mistr Evropy · 2× ER</span>
+      </div>
 
+    </div>
+
+    <div class="results-more-wrap">
+      <button class="results-more-btn" id="resultsMoreBtn" onclick="toggleResults()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        Zobrazit více výsledků (<span id="hiddenCount">24</span>)
+      </button>
     </div>
   </div>
 </section>
@@ -942,16 +1025,6 @@
         <div class="ach-title">Mistr severní Moravy + 3. MČR – ML junioři do 66 kg</div>
         <p class="ach-desc"><strong>Alexandr Novotný</strong> (nar. 2006) – 1. místo MMS 2024 (405 kg) a 3. místo MČR 2024 Benešov (součet <strong>450 kg</strong>). V roce 2026 stříbrná medaile na MMS, junioři -66 kg (432,5 kg).</p>
         <div class="ach-year">MČR 2024 + MMS 2024 &amp; 2026 · do 66 kg</div>
-      </div>
-
-      <!-- Filip Adámek -->
-      <div class="ach-card featured fade-up">
-        <div class="ach-icon-wrap">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="2.5" r="1.5"/><path d="M12 4 L12 11"/><path d="M12 8 L9 12"/><path d="M12 8 L15 12"/><path d="M12 11 L9 18"/><path d="M12 11 L15 18"/><path d="M9 18 L6.5 20.5"/><path d="M15 18 L17.5 20.5"/><line x1="2.5" y1="12" x2="21.5" y2="12"/><line x1="2.5" y1="10" x2="2.5" y2="14"/><line x1="21.5" y1="10" x2="21.5" y2="14"/><line x1="1" y1="11" x2="1" y2="13"/><line x1="23" y1="11" x2="23" y2="13"/></svg>
-        </div>
-        <div class="ach-title">3. místo MMS – Junioři do 83 kg</div>
-        <p class="ach-desc"><strong>Filip Adámek</strong> (nar. 2007) – bronzová medaile na MMS juniorů 2026, Karviná. Součet <strong>500 kg</strong> (dřep 185 / bench 110 / mrtvý tah 210 kg).</p>
-        <div class="ach-year">MMS 2026 · Junioři · do 83 kg</div>
       </div>
 
       <!-- Eliška Hamrlová -->
@@ -1142,6 +1215,19 @@
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.open').forEach(closeModal);
   });
+
+  // ── Zobrazit více výsledků ───────────────────
+  function toggleResults() {
+    const extras = document.querySelectorAll('.result-extra');
+    const btn    = document.getElementById('resultsMoreBtn');
+    const count  = document.getElementById('hiddenCount');
+    const open   = btn.classList.toggle('open');
+    extras.forEach(el => el.classList.toggle('visible', open));
+    btn.innerHTML = open
+      ? '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg> Zobrazit méně'
+      : '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg> Zobrazit více výsledků (' + count.textContent + ')';
+    if (!open) document.getElementById('vysledky').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 
   // ── Scroll fade-in ───────────────────────────
   const fadeObs = new IntersectionObserver(entries => {
