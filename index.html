@@ -1537,8 +1537,9 @@
       : _svg + ' Zobrazit více výsledků (' + _resultCount + ')';
     if (!open) {
       setTimeout(() => {
-        document.getElementById('vysledky').scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 320);
+        const top = document.getElementById('vysledky').getBoundingClientRect().top + window.scrollY - 70;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }, 50);
     }
   }
 
