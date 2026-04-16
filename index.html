@@ -75,9 +75,11 @@
     .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 62px; }
     .nav-logo { display: flex; align-items: center; gap: 12px; }
     .nav-logo-badge {
-      width: 38px; height: 38px; background: var(--red); border-radius: 8px;
-      display: grid; place-items: center; font-size: 1rem; font-weight: 900; flex-shrink: 0;
+      width: 46px; height: 30px; border-radius: 4px;
+      display: grid; place-items: center; flex-shrink: 0;
+      overflow: hidden; background: #111;
     }
+    .nav-logo-badge img { width: 100%; height: 100%; object-fit: contain; filter: brightness(1.15); }
     .nav-logo-text { font-weight: 700; font-size: .92rem; line-height: 1.25; }
     .nav-logo-sub  { font-size: .72rem; color: var(--muted); font-weight: 400; }
     .nav-links { display: flex; align-items: center; gap: 2px; }
@@ -412,7 +414,8 @@
     footer { background: var(--dark); border-top: 1px solid var(--border); padding: 32px 0; }
     .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
     .footer-brand { display: flex; align-items: center; gap: 10px; }
-    .footer-badge { width: 30px; height: 30px; background: var(--red); border-radius: 6px; display: grid; place-items: center; font-size: .8rem; font-weight: 900; }
+    .footer-badge { width: 44px; height: 28px; border-radius: 4px; overflow: hidden; background: #111; display: grid; place-items: center; }
+    .footer-badge img { width: 100%; height: 100%; object-fit: contain; filter: brightness(1.1); }
     .footer-name { font-weight: 700; font-size: .88rem; }
     .footer-sub  { font-size: .72rem; color: var(--muted); }
     .footer-copy { font-size: .78rem; color: var(--muted); }
@@ -423,6 +426,67 @@
     /* ── FADE-IN ─────────────────────────────── */
     .fade-up { opacity: 0; transform: translateY(26px); transition: opacity .55s ease, transform .55s ease; }
     .fade-up.visible { opacity: 1; transform: none; }
+
+    /* ── CUSTOM SCROLLBAR ───────────────────── */
+    ::-webkit-scrollbar { width: 7px; height: 7px; }
+    ::-webkit-scrollbar-track { background: var(--dark); }
+    ::-webkit-scrollbar-thumb { background: var(--dark4); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--red); }
+    * { scrollbar-width: thin; scrollbar-color: var(--dark4) var(--dark); }
+
+    /* ── TEAM ACHIEVEMENTS ──────────────────── */
+    #druzstva { background: var(--dark2); }
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 44px; }
+    .team-card {
+      background: var(--dark3); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px 22px;
+      transition: border-color .25s, transform .2s;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .team-card:hover { border-color: rgba(192,57,43,.4); transform: translateY(-3px); }
+    .team-medal { font-size: 1.4rem; margin-bottom: 4px; }
+    .team-card-title { font-size: 1rem; font-weight: 700; }
+    .team-card-desc { font-size: .86rem; color: var(--muted); line-height: 1.55; flex: 1; }
+    .team-card-year { font-size: .72rem; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: .07em; padding-top: 10px; border-top: 1px solid var(--border); margin-top: auto; }
+
+    /* ── GALLERY ────────────────────────────── */
+    #galerie { background: var(--dark); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px; margin-top: 44px;
+    }
+    @media (max-width: 600px) { .gallery-grid { grid-template-columns: 1fr 1fr; gap: 8px; } }
+    .gallery-item {
+      position: relative; overflow: hidden;
+      border-radius: var(--radius); border: 1px solid var(--border);
+      aspect-ratio: 4/3; background: var(--dark3); cursor: pointer;
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+    }
+    .gallery-item:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,.55); border-color: rgba(192,57,43,.45); }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+    .gallery-item:hover img { transform: scale(1.06); }
+    .gallery-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,.88));
+      padding: 28px 12px 10px;
+      font-size: .78rem; color: #ddd; font-weight: 500;
+    }
+    /* Lightbox */
+    #lightbox {
+      display: none; position: fixed; inset: 0; z-index: 3000;
+      background: rgba(0,0,0,.92); align-items: center; justify-content: center;
+    }
+    #lightbox.open { display: flex; }
+    #lightbox img { max-width: 92vw; max-height: 88vh; border-radius: 8px; object-fit: contain; }
+    #lightbox-close {
+      position: fixed; top: 18px; right: 22px;
+      background: var(--dark3); border: 1px solid var(--border);
+      border-radius: 8px; width: 40px; height: 40px; cursor: pointer;
+      display: grid; place-items: center; color: var(--light); font-size: 1.2rem;
+      transition: background .15s;
+    }
+    #lightbox-close:hover { background: var(--red); }
   </style>
 </head>
 <body>
@@ -432,7 +496,7 @@
   <div class="container">
     <div class="nav-inner">
       <a href="#hero" class="nav-logo">
-        <div class="nav-logo-badge">ST</div>
+        <div class="nav-logo-badge"><img src="logo.jpg" alt="TJ Lokomotiva Krnov logo" /></div>
         <div>
           <div class="nav-logo-text">Silový Trojboj Krnov</div>
           <div class="nav-logo-sub">TJ Lokomotiva Krnov</div>
@@ -444,6 +508,8 @@
         <a href="#historie">Historie</a>
         <a href="#vysledky">Výsledky</a>
         <a href="#uspechy">Úspěchy</a>
+        <a href="#druzstva">Tým</a>
+        <a href="#galerie">Galerie</a>
         <a href="#kontakty">Kontakty</a>
       </div>
       <button class="nav-burger" id="burger" aria-label="Menu">
@@ -456,6 +522,8 @@
       <a href="#historie">Historie oddílu</a>
       <a href="#vysledky">Výsledky závodů</a>
       <a href="#uspechy">Úspěchy</a>
+      <a href="#druzstva">Tymové výsledky</a>
+      <a href="#galerie">Galerie</a>
       <a href="#kontakty">Kontakty</a>
     </div>
   </div>
@@ -472,8 +540,8 @@
         Silový<br/><em>Trojboj</em><br/>Krnov
       </h1>
       <p class="hero-sub">
-        Oddíl silového trojboje TJ Lokomotiva Krnov – více než 50 let tradice,
-        soutěžení a výchovy silových sportovců na regionální, národní i mezinárodní úrovni.
+        Oddíl silového trojboje TJ Lokomotiva Krnov – jeden z nejstarších a nejúspěšnějších oddílů
+        v ČR s více než 50 lety tradice, mistrovskými tituly i evropskými rekordy.
       </p>
       <div class="hero-cta">
         <a href="#discipliny" class="btn btn-primary">
@@ -492,7 +560,7 @@
           <div class="stat-label">Disciplíny</div>
         </div>
         <div>
-          <div class="stat-num">8<span>+</span></div>
+          <div class="stat-num">14<span>+</span></div>
           <div class="stat-label">Titulů MČR &amp; ME</div>
         </div>
         <div>
@@ -723,9 +791,9 @@
     <div class="history-layout">
       <div class="fade-up">
         <div class="history-text">
-          <p>Dne <strong>1. února 1973</strong> se parta šesti lidí rozhodla založit pod <strong>TJ Lokomotiva Krnov</strong> oddíl silového trojboje. Tím byl položen základ jednoho z nejúspěšnějších trojbojových oddílů v Moravskoslezském regionu.</p>
+          <p>Dne <strong>1. února 1973</strong> se parta šesti lidí rozhodla založit pod <strong>TJ Lokomotiva Krnov</strong> oddíl silového trojboje – jeden z <strong>nejstarších a nejúspěšnějších oddílů silového trojboje v České republice</strong>.</p>
           <p><strong>Historicky první soutěž oddílu</strong> se konala 29. září 1973, kde závodníci ihned vybojovali medailová místa. Oddíl záhy přilákal výborné závodníky, kteří se prosazovali na domácí i mezinárodní scéně a řadili organizaci k elitě celého tehdejšího Československa.</p>
-          <p>Dnes oddíl působí ve všech věkových kategoriích – <strong>mládež, junioři, muži, veteráni i družstva</strong>. Z původní šestice zakladatelů se klubového dění aktivně dožil a podílel na jeho rozvoji <strong>Václav Stuchlík</strong>, který vede oddíl dodnes.</p>
+          <p>Za více než půl století existence vychoval klub závodníky s <strong>14+ tituly MČR a ME</strong>, Mistrem Evropy, několika národními rekordy a stovkami umístění na stupních vítězů. Dnes oddíl působí ve všech věkových kategoriích – <strong>mládež, junioři, muži, veteráni i družstva</strong>. Z původní šestice zakladatelů se klubového dění aktivně dožil a podílel na jeho rozvoji <strong>Václav Stuchlík</strong>, který vede oddíl dodnes.</p>
         </div>
         <div class="founders-title">Zakladatelé oddílu (1973)</div>
         <div class="founders-grid">
@@ -769,9 +837,24 @@
           <div class="tl-desc">T. Juříček – Mistr ČR v kat. 74 kg, součet 695 kg; Český rekord v dřepu 225 kg.</div>
         </div>
         <div class="tl-item">
+          <div class="tl-year">2022 &amp; 2023</div>
+          <div class="tl-title">Dvojnásobný Mistr ČR – Jakub Lukeš</div>
+          <div class="tl-desc">Jakub Lukeš (nar. 2000) vybojoval po sobě jdoucí tituly Mistra ČR juniorů RAW do 105 kg – 707,5 kg (Dolní Břežany) a 705 kg (Plzeň). Jeden z největších úspěchů v historii klubu.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2023</div>
+          <div class="tl-title">MČR – Ondřej Kotlárik</div>
+          <div class="tl-desc">O. Kotlárik – 1. místo MČR ML juniorů -59 kg v Plzni, součet 350 kg. Zároveň 2× Mistr severní Moravy.</div>
+        </div>
+        <div class="tl-item">
           <div class="tl-year">2024</div>
           <div class="tl-title">MČR v RAW mrtvém tahu</div>
           <div class="tl-desc">Š. M. Jedelský – 1. místo na MČR v kat. Mladší junioři do 93 kg, 235 kg.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2025</div>
+          <div class="tl-title">MČR EQ – Štěpán Ticháček</div>
+          <div class="tl-desc">Štěpán Ticháček – titul Mistra ČR juniorů EQ do 74 kg, součet 535 kg (Lukov). Zároveň 3. místo na MČR Open.</div>
         </div>
       </div>
     </div>
@@ -812,6 +895,11 @@
         <span class="result-badge badge-silver">🥈 2. místo · 560 kg</span>
       </div>
       <div class="result-row fade-up">
+        <span class="result-date">2025 · Karviná</span>
+        <span class="result-name">9. Ot. MČR juniorů bench press – Junioři -74 kg <span class="res-athlete">Ondřej Bučan</span></span>
+        <span class="result-badge badge-silver">🥈 2. místo · 125 kg</span>
+      </div>
+      <div class="result-row fade-up">
         <span class="result-date">2024 · Karviná</span>
         <span class="result-name">MČR RAW mrtvý tah – ML junioři -93 kg <span class="res-athlete">Štěpán M. Jedelský</span></span>
         <span class="result-badge badge-gold">🥇 1. místo · 235 kg</span>
@@ -839,6 +927,16 @@
 
       <!-- skryté řádky -->
       <div class="result-row fade-up result-extra hidden">
+        <span class="result-date">2025 · Karviná</span>
+        <span class="result-name">MČR bench press RAW – Muži -83 kg <span class="res-athlete">Ondřej Hilgert</span></span>
+        <span class="result-badge badge-bronze">🥉 3. místo · 157,5 kg</span>
+      </div>
+      <div class="result-row fade-up result-extra hidden">
+        <span class="result-date">2024 · Karviná</span>
+        <span class="result-name">8. MMS ML juniorů RAW – ML junioři -59 kg <span class="res-athlete">Ondřej Kotlárik</span></span>
+        <span class="result-badge badge-gold">🥇 1. místo · 372,5 kg</span>
+      </div>
+      <div class="result-row fade-up result-extra hidden">
         <span class="result-date">2024 · Karviná</span>
         <span class="result-name">8. MMS juniorů RAW – ML junioři -83 kg <span class="res-athlete">Adam Lukeš</span></span>
         <span class="result-badge badge-bronze">🥉 3. místo · 385 kg</span>
@@ -847,6 +945,16 @@
         <span class="result-date">2024 · Karviná</span>
         <span class="result-name">Otevřené MČR juniorů RAW mrtvý tah – Junioři -105 kg <span class="res-athlete">David Petr</span></span>
         <span class="result-badge badge-bronze">🥉 3. místo · 255 kg</span>
+      </div>
+      <div class="result-row fade-up result-extra hidden">
+        <span class="result-date">2023 · Plzeň</span>
+        <span class="result-name">MČR ML juniorů RAW – ML junioři -59 kg <span class="res-athlete">Ondřej Kotlárik</span></span>
+        <span class="result-badge badge-gold">🥇 1. místo · 350 kg</span>
+      </div>
+      <div class="result-row fade-up result-extra hidden">
+        <span class="result-date">2023 · Karviná</span>
+        <span class="result-name">7. MMS ML juniorů RAW – ML junioři -59 kg <span class="res-athlete">Ondřej Kotlárik</span></span>
+        <span class="result-badge badge-gold">🥇 1. místo · 325 kg</span>
       </div>
       <div class="result-row fade-up result-extra hidden">
         <span class="result-date">2023 · Karviná</span>
@@ -862,6 +970,16 @@
         <span class="result-date">2023 · Karviná</span>
         <span class="result-name">7. MMS juniorů RAW – ML junioři -74 kg <span class="res-athlete">Adam Macenauer</span></span>
         <span class="result-badge badge-bronze">🥉 3. místo · 410 kg</span>
+      </div>
+      <div class="result-row fade-up result-extra hidden">
+        <span class="result-date">2023 · Svitavy</span>
+        <span class="result-name">10. MMS mužů RAW – Muži +120 kg <span class="res-athlete">Adam Kopsa</span></span>
+        <span class="result-badge badge-silver">🥈 2. místo · 615 kg</span>
+      </div>
+      <div class="result-row fade-up result-extra hidden">
+        <span class="result-date">2023 · Karviná</span>
+        <span class="result-name">2. Ot. MČR mužů mrtvý tah – Muži +120 kg <span class="res-athlete">Adam Kopsa</span></span>
+        <span class="result-badge badge-bronze">🥉 3. místo · 260 kg</span>
       </div>
       <div class="result-row fade-up result-extra hidden">
         <span class="result-date">2023 · Plzeň</span>
@@ -1199,7 +1317,7 @@
   <div class="container">
     <div class="footer-inner">
       <div class="footer-brand">
-        <div class="footer-badge">ST</div>
+        <div class="footer-badge"><img src="logo.jpg" alt="TJ Lokomotiva Krnov" /></div>
         <div>
           <div class="footer-name">Silový Trojboj Krnov</div>
           <div class="footer-sub">TJ Lokomotiva Krnov &middot; od roku 1973</div>
